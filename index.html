@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102a27">
+<title>登別から小樽へ｜11月20日のドライブ</title>
+<style>
+:root{color-scheme:light;--ink:#152c29;--muted:#51645f;--paper:#f5f2e9;--white:#fffdf7;--green:#1b543e;--line:#d9dfd4;--mint:#bfe7b3;--orange:#ffc789}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.65 system-ui,"Noto Sans JP",sans-serif}main{max-width:1176px;margin:auto;padding:36px 28px 48px}h1,h2,h3,p{margin:0}header{margin:0 0 24px}.date{color:var(--green);font-weight:750;letter-spacing:.12em;font-size:.82rem}h1{font-size:clamp(2rem,5.4vw,4.25rem);line-height:1.2;letter-spacing:-.045em;margin:7px 0 12px}header p:last-child{color:var(--muted);font-size:1rem}.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);gap:18px;align-items:start}.panel{border-radius:20px;overflow:hidden;background:var(--white);border:1px solid var(--line)}.player{background:#102a27;color:#f5f8ef;border-color:#102a27}.screenTop,.controls{padding:15px 20px}.screenTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.screenTop h2{font-size:1.02rem}.screenTop small{color:#c0d5cb;text-align:right}canvas{display:block;width:100%;height:auto;background:#234844}.caption{min-height:115px;padding:12px 20px 0}.caption .tag{color:#c2e9b6;font-size:.78rem;font-weight:750;letter-spacing:.08em}.caption h3{font-size:clamp(1.15rem,3vw,1.5rem);margin:2px 0}.caption p:last-child{color:#dae8df}.controlrow{display:flex;align-items:center;flex-wrap:wrap;gap:8px}button,select{font:inherit}button{cursor:pointer}button,select, .link{border:1px solid var(--line);border-radius:10px;padding:7px 11px;color:var(--ink);background:var(--white)}button:hover,.link:hover{border-color:var(--green)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #d57b28;outline-offset:3px}.primary{background:var(--mint);border-color:var(--mint);color:#163420;font-weight:800;min-width:96px}.controlrow select,.controlrow button:not(.primary){background:#21413a;border-color:#66877a;color:white}.clock{margin-left:auto;color:#f8e6b4;font-weight:800;font-variant-numeric:tabular-nums}.seek{display:block;width:100%;margin:12px 0 0;accent-color:#bfe7b3}.sidebar{padding:19px}.sidebar h2,section h2{font-size:1.19rem;margin-bottom:9px}.setting{margin-bottom:13px}.setting label{display:block;font-weight:700;font-size:.87rem;margin-bottom:4px}.setting select{width:100%;min-height:42px}.summary{margin:16px 0 12px;padding:12px 14px;background:#eaf3e2;border-radius:13px}.summary[data-late="true"]{background:#ffead4}.summary strong{font-size:2rem;line-height:1.2;font-variant-numeric:tabular-nums}.summary p{font-size:.84rem}.plan{list-style:none;padding:0;margin:0}.plan button{display:grid;grid-template-columns:49px 1fr;gap:8px;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-bottom-color:var(--line);border-radius:0;padding:7px 4px;font-size:.87rem}.plan button[aria-current="step"]{background:#eaf3e2;border-radius:8px;border-color:#c6dbc1}.plan time{color:#286047;font-weight:750;font-variant-numeric:tabular-nums}.notice{margin-top:18px;padding:17px 21px;background:#ffe8cb;border:1px solid #efd5b5;border-radius:16px}.notice p{margin-top:5px}.notice a,.details a,footer a{color:#19523f;font-weight:650;text-underline-offset:3px}.details{margin-top:22px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.cards article{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:15px 16px}.cards h3{font-size:1rem;margin-bottom:5px}.cards p{font-size:.9rem;margin-bottom:8px}.links{display:flex;flex-wrap:wrap;gap:6px 13px;font-size:.83rem}footer{margin-top:21px;font-size:.84rem;color:var(--muted)}footer details{border-top:1px solid var(--line);padding-top:12px}footer summary{cursor:pointer;font-weight:750}footer p{margin-top:8px}.noscript{padding:16px;background:white;color:var(--ink)}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.caption{min-height:unset;padding-bottom:4px}main{padding:24px 14px 40px}}@media(max-width:400px){.controls,.screenTop,.caption{padding-left:12px;padding-right:12px}.clock{margin-left:0}.screenTop small{font-size:.73rem}}@media print{main{padding:0}.grid,.cards{display:block}.panel,.cards article{break-inside:avoid}.controls,.setting{display:none}}
+
+.trip-tabs{display:flex;gap:6px;margin:0 0 18px;padding:4px;border:1px solid var(--line);border-radius:13px;background:#eaece1;width:fit-content;max-width:100%}
+.trip-tabs[hidden],[role="tabpanel"][hidden]{display:none}
+.trip-tabs button{min-height:42px;border-color:transparent;background:transparent;font-weight:750}
+.trip-tabs [aria-selected="true"]{background:var(--green);color:#fff}
+.store-list{padding:clamp(12px,3vw,24px)}
+.store-list h2{margin:0 0 8px}
+.store-list > p{margin-bottom:14px;color:var(--muted)}
+.store-list table{border-collapse:collapse;width:100%;line-height:1.45}
+.store-list th,.store-list td{text-align:left;padding:10px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+.store-list thead{background:#eaf3e2}
+.store-list tbody tr:last-child>*{border-bottom:0}
+.store-list a{color:#19523f;font-weight:650;text-underline-offset:3px}
+.store-list .phone{white-space:nowrap;font-variant-numeric:tabular-nums}
+.store-list .store-map{display:inline-block;margin-top:2px;font-size:.85em}
+.store-list .store-source{margin:10px 0 0;font-size:.87rem}
+@media(max-width:480px){.trip-tabs{width:100%}.trip-tabs button{flex:1;padding-inline:5px}.store-list th,.store-list td{padding:8px 4px;font-size:.83rem}}
+@media print{.trip-tabs{display:none!important}}
+
+.traffic-panel{padding:clamp(14px,3vw,24px)}
+.traffic-panel > p{color:var(--muted);margin-bottom:15px}
+.traffic-panel .traffic-work{padding:14px 16px;background:#ffe8cb;border:1px solid #efd5b5;border-radius:13px;margin:0 0 15px}
+.traffic-work p{margin:5px 0 8px}
+.traffic-panel a{color:#19523f;font-weight:700;text-underline-offset:3px}
+.traffic-panel article>a,.traffic-work a{display:inline-block;padding:5px 0}
+.traffic-panel .traffic-official{margin:14px 0 0}
+
+.player{background:#0a2430;border-color:#0a2430}
+.screenTop{background:#102e39}
+.screenTop h2{font-size:1.16rem;letter-spacing:.035em}
+.screenTop button{background:#1a3d46;border-color:#578078;color:#edf5ee;padding:6px 12px;font-size:.88rem;font-weight:700}
+.screenTop button[aria-pressed="true"]{background:#c3e5be;color:#102f32;border-color:#c3e5be}
+.map-scene{position:relative;isolation:isolate}
+.map-scene canvas{background:#0b2635}
+.map-overlay{position:absolute;inset:auto 15px 12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none;color:#d4e9e2;font-size:.72rem;font-weight:750;letter-spacing:.07em}
+.map-overlay span{background:rgba(7,25,33,.82);border:1px solid #598582;border-radius:6px;padding:4px 8px}
+.caption .tag{color:#ffd38a}
+@media(max-width:480px){.map-overlay{inset:auto 8px 7px;font-size:.65rem}.map-overlay span{padding:2px 5px}}
+</style>
+</head>
+<body>
+<main>
+<header><p class="date">2026年11月20日（金）｜北海道</p><h1>登別から、小樽へ。</h1><p>08:55 登別地獄谷 → 札幌で寿司 → 15:00までに小樽・堺町通りへ</p></header>
+
+<div class="trip-tabs" id="tripTabs" role="tablist" aria-label="旅行案内" hidden>
+  <button type="button" id="itineraryTab" role="tab" aria-selected="true" aria-controls="itineraryPanel">旅程シミュレーション</button>
+  <button type="button" id="shopsTab" role="tab" aria-selected="false" aria-controls="shopsPanel" tabindex="-1">トリトン店舗一覧</button>
+  <button type="button" id="trafficTab" role="tab" aria-selected="false" aria-controls="trafficPanel" tabindex="-1">交通情報</button>
+</div>
+<div id="itineraryPanel" role="tabpanel" aria-labelledby="itineraryTab">
+<div class="grid">
+<section class="player panel" aria-label="行程アニメーション">
+<div class="screenTop"><h2>3Dドライブ</h2><button id="cameraView" type="button" aria-pressed="false">全景カメラ</button></div>
+<div class="map-scene"><canvas id="map" width="1200" height="740" role="img" aria-label="登別温泉のホテルから地獄谷に立ち寄り、道央道で札幌、札樽道で小樽に至る立体模式図"></canvas><div class="map-overlay" aria-hidden="true"><span>登別 → 小樽</span><span>3D模式図</span></div></div>
+<div class="caption"><p class="tag" id="tag">出発</p><h3 id="stageTitle">ホテルまほろばを出発</h3><p id="stageText">チェックアウトを済ませ、車で地獄谷駐車場へ。</p></div>
+<div class="controls"><div class="controlrow"><button id="play" class="primary" type="button" aria-label="行程を再生">▶ 再生</button><button id="restart" type="button">最初へ</button><select id="speed" aria-label="再生速度"><option value="1">1×</option><option value="2">2×</option><option value=".5">0.5×</option></select><span class="clock" id="clock">08:40</span></div><input class="seek" id="seek" type="range" min="0" max="295" value="0" step="1" aria-label="シミュレーション時刻"></div>
+</section>
+<aside class="panel sidebar"><h2>到着時刻を試算</h2>
+<div class="setting"><label for="lunch">昼食プラン</label><select id="lunch"><option value="dine">トリトン豊平店で食事</option><option value="take">トリトンで持ち帰り（事前注文）</option><option value="direct">札幌に寄らず小樽へ直行</option></select></div>
+<div class="setting"><label for="delay">計画に追加する道路の遅れ</label><select id="delay"><option value="0">追加なし</option><option value="15">合計＋15分</option><option value="30">合計＋30分</option><option value="45">合計＋45分</option><option value="60">合計＋60分</option></select></div>
+<div class="summary" id="summary" aria-live="polite"><p>小樽・堺町通り 到着見込み</p><strong id="eta">13:35</strong><p id="margin">15:00までに85分の余裕</p></div><ol class="plan" id="plan" aria-label="時刻表"></ol>
+</aside>
+</div>
+<noscript><div class="noscript">基準行程は08:40 ホテル発 → 08:55 地獄谷展望台 → 09:30 地獄谷駐車場発 → 11:25 トリトン → 12:20 店発 → 13:35 小樽・堺町通りです。JavaScriptを有効にすると再生と試算が使えます。</div></noscript>
+<section class="notice" aria-label="雪と道路規制"><h2>12:55が昼食の判断時刻</h2><p>12:55までに着席できそうにない場合や、小樽までのナビ到着予想が15:00を超える場合は、事前注文済みなら持ち帰りへ。受取時刻に間に合わない場合は直行を選びます。店内利用の計画は<strong>12:20出発</strong>です。遅れた場合は13:30を出発の目安に、ナビで小樽の到着見込みを確認してください。</p><p>札幌・小樽方面に雪予報。道央道の苫小牧西IC〜苫小牧中央ICは11月20日まで終日車線規制の予定です。地獄谷では凍結や遊歩道の規制表示を確認し、歩きにくければ展望台周辺だけ見学してください。車で出発する前に道路規制と冬タイヤを確認してください。</p><div class="links"><a href="#trafficPanel" id="routeTraffic">ルート別の渋滞・車線規制</a><a href="https://www.driveplaza.com/traffic/camera/hokkaido.html">道路ライブカメラ</a><a href="https://www.e-nexco.co.jp/renewal/hokkaido_2026/20_21/">工事区間</a><a href="https://www.npfj.or.jp/branch-list/nobori/">地獄谷・駐車場の案内</a></div></section>
+<section class="details"><h2>運転ルートと目的地</h2>
+<div class="cards">
+<article><h3>朝｜まほろば → 登別地獄谷</h3><p>08:40 チェックアウト後に車でホテル発。08:50 地獄谷駐車場、08:55ごろ展望台へ。見学は無料で24時間可。駐車場は8:00ごろから料金徴収、普通車500円です。展望台を中心に散策し、09:30に車で出発します。</p><div class="links"><a href="https://maps.app.goo.gl/AcPDKKF9sjFxvhot5?g_st=ac">ホテル</a><a href="https://noboribetsu-spa.jp/spot/spot0034/">登別地獄谷の案内</a><a id="mapMorning" href="https://www.google.com/maps/search/?api=1&amp;query=登別地獄谷駐車場">地獄谷駐車場へのナビ</a></div></article>
+<article><h3>昼｜登別東IC → 北広島IC</h3><p>地獄谷駐車場 → 道道2号 → 09:45 登別東ICからE5道央道・札幌方面 → 苫小牧・千歳を通過 → 10:50 北広島ICで降りる → 国道36号を札幌・豊平方面 → 11:25 トリトン豊平店（11:00開店）。高速86.8km、通常53分、普通車2,510円。必要なら北広島IC手前の輪厚PAで休憩し、その分を見込んでください。</p><div class="links"><a href="https://maps.app.goo.gl/vqmFwo4sLZdKzu94A?g_st=ac">トリトン豊平店</a><a id="mapLunch" href="https://toriton-kita1.jp/shop/toyohira/">IC指定ナビ</a><a href="https://toriton-kita1.jp/shop/toyohira/">持ち帰り注文</a></div></article>
+<article><h3>午後｜札幌北IC → 小樽IC</h3><p>12:20 店発 → 国道36号から札幌中心部を抜け、国道274号（札幌新道）から札幌北ICの小樽方面入口へ → 12:45 E5A札樽道 → 札幌西・銭函を通過 → 小樽JCTは小樽IC方面へ → 13:20 小樽IC → 港町7-7の商店街駐車場 → 徒歩約3分。高速30.7km、通常24分、普通車1,240円。駐車場は1時間300円。</p><div class="links"><a id="mapOtaru" href="https://otaru-sakaimachi.com/service/service_parking/">IC・駐車場指定ナビ</a><a href="https://maps.app.goo.gl/BjVhyJitc5sBL3qV7?g_st=ac">堺町通り</a></div></article>
+</div>
+</section>
+<footer><details><summary>試算条件・情報源</summary><p>車でホテルまほろばを出発すると仮定し、小樽IC通過ではなく堺町通りの徒歩到着を締切に設定。高速のみの通常時間を基に工事・駐車・市街地走行の余裕を組み込みました。追加遅延は走行区間に配分する仮定で、店内プランでは食事時間55分を維持します。持ち帰りは到着に合わせて受取予約が取れた場合を想定。店内席の予約はできません。直行はE5 → 札幌JCT → E5A → 小樽ICで、登別東ICから通常91分、普通車3,880円です。</p><p><a id="mapDirect" href="https://www.driveplaza.com/">直行ルートのナビ</a> ・ <a href="https://www.npfj.or.jp/branch-list/nobori/">地獄谷・駐車場</a> ・ <a href="https://h-mahoroba.jp/access/">ホテル</a> ・ <a href="https://toriton-kita1.jp/shop/toyohira/">豊平店</a> ・ <a href="https://otaru-sakaimachi.com/service/service_parking/">小樽駐車場</a> ・ <a href="https://www.fnn.jp/articles/-/1155569">11月20日の天気予報（札幌管区気象台発表）</a> ・ <a href="https://www.driveplaza.com/dp/SearchQuick?startPlaceKana=登別東&amp;arrivePlaceKana=北広島">高速料金①</a> ・ <a href="https://www.driveplaza.com/dp/SearchQuick?startPlaceKana=札幌北&amp;arrivePlaceKana=小樽">高速料金②</a> ・ <a href="https://www.driveplaza.com/dp/SearchQuick?startPlaceKana=登別東&amp;arrivePlaceKana=小樽">高速料金③</a></p></details></footer>
+
+</div>
+<section id="shopsPanel" role="tabpanel" aria-labelledby="shopsTab" tabindex="0" class="panel store-list">
+  <h2>トリトン店舗一覧</h2>
+  <p>豊平店を含む札幌市内・近郊の10店舗。同じ豊平区なら平岸店、登別からの道中なら北広島ICから車で約5分の清田店が候補です。</p>
+  <table aria-label="回転寿しトリトンの店舗、住所、電話番号">
+    <thead><tr><th scope="col">店名</th><th scope="col">住所</th><th scope="col">電話番号</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">豊平店</th><td>札幌市豊平区豊平4条6丁目1-10<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E8%B1%8A%E5%B9%B3%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E8%B1%8A%E5%B9%B34%E6%9D%A16%E4%B8%81%E7%9B%AE1-10" target="_blank" rel="noopener" aria-label="豊平店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E8%B1%8A%E5%B9%B34%E6%9D%A16%E4%B8%81%E7%9B%AE1-10+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="豊平店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-817-7788" aria-label="豊平店に電話 011-817-7788">011-817-7788</a></td></tr>
+      <tr><th scope="row">平岸店</th><td>札幌市豊平区平岸2条15丁目<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E5%B9%B3%E5%B2%B8%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E5%B9%B3%E5%B2%B82%E6%9D%A115%E4%B8%81%E7%9B%AE" target="_blank" rel="noopener" aria-label="平岸店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E5%B9%B3%E5%B2%B82%E6%9D%A115%E4%B8%81%E7%9B%AE+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="平岸店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-818-3366" aria-label="平岸店に電話 011-818-3366">011-818-3366</a></td></tr>
+      <tr><th scope="row">北8条光星店</th><td>札幌市東区北8条東5丁目19-1<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E5%8C%978%E6%9D%A1%E5%85%89%E6%98%9F%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%9D%B1%E5%8C%BA%E5%8C%978%E6%9D%A1%E6%9D%B15%E4%B8%81%E7%9B%AE19-1" target="_blank" rel="noopener" aria-label="北8条光星店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%9D%B1%E5%8C%BA%E5%8C%978%E6%9D%A1%E6%9D%B15%E4%B8%81%E7%9B%AE19-1+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="北8条光星店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-374-8666" aria-label="北8条光星店に電話 011-374-8666">011-374-8666</a></td></tr>
+      <tr><th scope="row">伏古店</th><td>札幌市東区伏古7条2丁目4-8<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E4%BC%8F%E5%8F%A4%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%9D%B1%E5%8C%BA%E4%BC%8F%E5%8F%A47%E6%9D%A12%E4%B8%81%E7%9B%AE4-8" target="_blank" rel="noopener" aria-label="伏古店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%9D%B1%E5%8C%BA%E4%BC%8F%E5%8F%A47%E6%9D%A12%E4%B8%81%E7%9B%AE4-8+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="伏古店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-782-5555" aria-label="伏古店に電話 011-782-5555">011-782-5555</a></td></tr>
+      <tr><th scope="row">円山店</th><td>札幌市中央区北4条西23丁目2番17号<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E5%86%86%E5%B1%B1%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8C%974%E6%9D%A1%E8%A5%BF23%E4%B8%81%E7%9B%AE2%E7%95%AA17%E5%8F%B7" target="_blank" rel="noopener" aria-label="円山店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8C%974%E6%9D%A1%E8%A5%BF23%E4%B8%81%E7%9B%AE2%E7%95%AA17%E5%8F%B7+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="円山店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-633-5500" aria-label="円山店に電話 011-633-5500">011-633-5500</a></td></tr>
+      <tr><th scope="row">栄町店</th><td>札幌市東区北38条東15丁目2<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E6%A0%84%E7%94%BA%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%9D%B1%E5%8C%BA%E5%8C%9738%E6%9D%A1%E6%9D%B115%E4%B8%81%E7%9B%AE2" target="_blank" rel="noopener" aria-label="栄町店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%9D%B1%E5%8C%BA%E5%8C%9738%E6%9D%A1%E6%9D%B115%E4%B8%81%E7%9B%AE2+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="栄町店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-731-3333" aria-label="栄町店に電話 011-731-3333">011-731-3333</a></td></tr>
+      <tr><th scope="row">清田店</th><td>札幌市清田区里塚1条4丁目<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E6%B8%85%E7%94%B0%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%B8%85%E7%94%B0%E5%8C%BA%E9%87%8C%E5%A1%9A1%E6%9D%A14%E4%B8%81%E7%9B%AE" target="_blank" rel="noopener" aria-label="清田店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%B8%85%E7%94%B0%E5%8C%BA%E9%87%8C%E5%A1%9A1%E6%9D%A14%E4%B8%81%E7%9B%AE+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="清田店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-889-6777" aria-label="清田店に電話 011-889-6777">011-889-6777</a></td></tr>
+      <tr><th scope="row">厚別店</th><td>札幌市厚別区厚別東4条3丁目<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E5%8E%9A%E5%88%A5%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E5%8E%9A%E5%88%A5%E5%8C%BA%E5%8E%9A%E5%88%A5%E6%9D%B14%E6%9D%A13%E4%B8%81%E7%9B%AE" target="_blank" rel="noopener" aria-label="厚別店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E5%8E%9A%E5%88%A5%E5%8C%BA%E5%8E%9A%E5%88%A5%E6%9D%B14%E6%9D%A13%E4%B8%81%E7%9B%AE+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="厚別店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-898-7777" aria-label="厚別店に電話 011-898-7777">011-898-7777</a></td></tr>
+      <tr><th scope="row">手稲店</th><td>札幌市手稲区前田2条13丁目3-30<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E6%89%8B%E7%A8%B2%E5%BA%97+%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%89%8B%E7%A8%B2%E5%8C%BA%E5%89%8D%E7%94%B02%E6%9D%A113%E4%B8%81%E7%9B%AE3-30" target="_blank" rel="noopener" aria-label="手稲店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%89%8B%E7%A8%B2%E5%8C%BA%E5%89%8D%E7%94%B02%E6%9D%A113%E4%B8%81%E7%9B%AE3-30+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="手稲店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-699-5288" aria-label="手稲店に電話 011-699-5288">011-699-5288</a></td></tr>
+      <tr><th scope="row">江別店</th><td>江別市高砂町25-3<br><a class="store-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9E%E8%BB%A2%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E6%B1%9F%E5%88%A5%E5%BA%97+%E6%B1%9F%E5%88%A5%E5%B8%82%E9%AB%98%E7%A0%82%E7%94%BA25-3" target="_blank" rel="noopener" aria-label="江別店の地図（新しいタブ）">地図</a><br><a class="store-map store-parking" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B1%9F%E5%88%A5%E5%B8%82%E9%AB%98%E7%A0%82%E7%94%BA25-3+%E5%91%A8%E8%BE%BA%E3%81%AE%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="江別店周辺の駐車場をGoogleマップで検索（新しいタブ）">周辺の駐車場</a></td><td><a class="phone" href="tel:011-381-0800" aria-label="江別店に電話 011-381-0800">011-381-0800</a></td></tr>
+    </tbody>
+  </table>
+  <p class="store-source"><a href="https://toriton-kita1.jp/shop/" target="_blank" rel="noopener">トリトン公式店舗一覧</a></p>
+</section>
+
+<section id="trafficPanel" role="tabpanel" aria-labelledby="trafficTab" tabindex="0" class="panel traffic-panel">
+  <h2>ルートの交通情報</h2>
+  <p>登別を出る前と、札幌を出る前に確認。路線別の一覧で更新時刻、進行方向、規制区間を見てください。</p>
+  <article class="traffic-work">
+    <h3>工事予定｜道央道 苫小牧西IC → 苫小牧中央IC</h3>
+    <p>NEXCO東日本は11月20日（金）まで上下線で終日車線規制を予定しています。札幌方面へ向かう途中で通過する区間です。</p>
+    <a href="https://www.e-nexco.co.jp/renewal/hokkaido_2026/20_21/" target="_blank" rel="noopener">NEXCO東日本の工事日程・区間図 ↗</a>
+  </article>
+  <div class="cards">
+    <article>
+      <h3>E5 道央道｜札幌方面</h3>
+      <p>登別東IC → 苫小牧・千歳 → 北広島IC。小樽へ直行する場合は札幌JCTまで確認。</p>
+      <a href="https://roadway.yahoo.co.jp/traffic/pref/1/road/1001001/list?deeplink=0" target="_blank" rel="noopener">道央道の規制一覧（下りを確認） ↗</a>
+    </article>
+    <article>
+      <h3>E5A 札樽道｜小樽方面</h3>
+      <p>札幌北IC → 札幌西・銭函 → 小樽IC。小樽へ直行する場合は札幌JCTから確認。</p>
+      <a href="https://roadway.yahoo.co.jp/traffic/road/1003001/list" target="_blank" rel="noopener">札樽道の規制一覧（上りを確認） ↗</a>
+    </article>
+    <article>
+      <h3>一般道｜国道36号・274号など</h3>
+      <p>北広島IC → トリトン豊平店 → 札幌北IC。国道の通行止めなどを地図で確認。</p>
+      <a href="https://www.road-info-prvs.mlit.go.jp/roadinfo/" target="_blank" rel="noopener">国土交通省の道路情報マップ ↗</a>
+    </article>
+  </div>
+  <p class="traffic-official">高速道路の規制一覧はJARTIC提供。<a href="https://www.driveplaza.com/traffic/roadinfo/" target="_blank" rel="noopener">NEXCO東日本の渋滞・規制情報 ↗</a> ・ <a href="https://www.driveplaza.com/traffic/camera/hokkaido.html" target="_blank" rel="noopener">北海道のライブカメラ ↗</a></p>
+</section>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const points = {
+ hotel:[-329,259], parking:[-302,242], valley:[-326,211], nob:[-257,267],
+ tomo:[11,214], chi:[141,101], kit:[122,1], sushi:[63,-119], north:[60,-182],
+ jct:[155,-153], zeni:[-106,-249], otaru:[-192,-271], street:[-229,-298]
+};
+const local = [
+ [0,'出発','ホテルまほろばを出発','チェックアウトを済ませ、車で地獄谷駐車場へ。',['hotel','parking'],10],
+ [10,'徒歩','地獄谷駐車場 → 展望台','普通車500円。駐車場から展望台までは徒歩約3〜5分。',['parking','valley'],5],
+ [15,'観光','登別地獄谷を散策','展望台から噴気が立ち上る火口跡を見学。遊歩道は現地の規制と足元を確認。',['valley'],25],
+ [40,'徒歩','展望台から駐車場へ','車に戻り、道路の規制情報を確認してから出発。',['valley','parking'],10]
+];
+const drive = [
+ [50,'一般道','道道2号で登別東ICへ','地獄谷駐車場から登別東ICへ向かいます。',['parking','nob'],15],
+ [65,'E5 道央道','登別東IC → 苫小牧・千歳','札幌方面へ。苫小牧西IC〜苫小牧中央ICは終日車線規制の予定です。',['nob','tomo','chi','kit'],65],
+ [130,'国道36号','北広島ICで降りて豊平へ','国道36号を札幌方面へ進み、豊平4条6丁目のトリトンへ。',['kit','sushi'],35]
+];
+function build(mode, delay) {
+ if (mode === 'direct') {
+  return [...local,drive[0],
+   [65,'E5 道央道','登別東IC → 札幌JCT','北広島ICを通過し、札幌JCTでE5A・小樽方面へ。',['nob','tomo','chi','kit','jct'],80+Math.round(delay*.7)],
+   [145+Math.round(delay*.7),'E5A 札樽道','札幌JCT → 小樽IC','札幌西・銭函を通過。小樽JCTは小樽IC方面へ。',['jct','north','zeni','otaru'],40+delay-Math.round(delay*.7)],
+   [185+delay,'駐車と徒歩','小樽IC → 商店街駐車場','港町7-7に駐車。堺町通りまで徒歩約3分。',['otaru','street'],15],
+   [200+delay,'到着','小樽堺町通りに到着','堺町通りの散策をスタート。',['street'],0]];
+ }
+ const take = mode === 'take';
+ const first = Math.round(delay * .65);
+ const second = delay-first;
+ const leave = (take ? 195 : 220)+first;
+ const adjustedDrive = drive.map(([start,tag,title,description,path,length],i) =>
+  [start+(i===2?first:0),tag,title,description,path,length+(i===1?first:0)]);
+ return [...local,...adjustedDrive,
+  [165+first,'昼食','トリトン豊平店',take?'注文した寿司を受け取ります。受取時刻はお店の案内に合わせてください。':'受付と食事で55分を確保。待ち時間が長ければ到着見込みを再確認。',['sushi'],take?30:55],
+  [leave,'札幌市内','豊平 → 札幌北IC','国道36号から市街地を抜け、札幌新道から札幌北ICの小樽方面入口へ。',['sushi','north'],25],
+  [leave+25,'E5A 札樽道','札幌北IC → 小樽IC','札幌西・銭函を通過。小樽JCTは小樽IC方面へ。',['north','zeni','otaru'],35+second],
+  [leave+60+second,'駐車と徒歩','小樽IC → 商店街駐車場','港町7-7に駐車。堺町通りまで徒歩約3分。',['otaru','street'],15],
+  [leave+75+second,'到着','小樽堺町通りに到着','堺町通りの散策をスタート。',['street'],0]];
+}
+const links = {
+ mapMorning:['ホテルまほろば 登別','登別地獄谷駐車場',[]],
+ mapLunch:['登別地獄谷駐車場','トリトン 豊平店',['登別東IC','北広島IC']],
+ mapOtaru:['トリトン 豊平店','小樽堺町通り商店街駐車場 小樽市港町7-7',['札幌北IC 小樽方面入口 札幌市北区北33条西6丁目','小樽IC']],
+ mapDirect:['登別地獄谷駐車場','小樽堺町通り商店街駐車場 小樽市港町7-7',['登別東IC','小樽IC']]
+};
+for(const [id,[origin,destination,waypoints]] of Object.entries(links)) {
+ const params = new URLSearchParams({api:'1',origin,destination,travelmode:'driving'});
+ if(waypoints.length) params.set('waypoints',waypoints.join('|'));
+ $(id).href='https://www.google.com/maps/dir/?'+params;
+}
+const routeScene = (() => {
+ const canvas = $('map');
+ const ctx = canvas.getContext('2d');
+ const width = canvas.width, height = canvas.height;
+ const focal = 1080;
+ const coast = [[-535,-144],[-392,-222],[-299,-309],[-231,-328],[-171,-290],[-108,-302],[-32,-318],[44,-395],[180,-470],[356,-439],[482,-327],[486,-180],[425,-54],[403,57],[317,134],[226,212],[98,239],[-12,258],[-139,277],[-230,309],[-330,331],[-433,377],[-535,330]];
+ const blend = (a,b,t) => a+(b-a)*t;
+ const clamp = (x,a,b) => Math.min(b,Math.max(a,x));
+ const smooth = t => t*t*(3-2*t);
+ function noise(x,z) {
+  const value = Math.sin(x*127.1+z*311.7)*43758.5453;
+  return value-Math.floor(value);
+ }
+ function coastline(x,z) {
+  let inside = false, distance = Infinity;
+  for(let i=0;i<coast.length;i++){
+   const [ax,az]=coast[i], [bx,bz]=coast[(i+1)%coast.length];
+   const dx=bx-ax, dz=bz-az;
+   if((az>z)!==(bz>z) && x<(bx-ax)*(z-az)/(bz-az)+ax) inside=!inside;
+   const t=clamp(((x-ax)*dx+(z-az)*dz)/(dx*dx+dz*dz),0,1);
+   distance=Math.min(distance,Math.hypot(x-ax-t*dx,z-az-t*dz));
+  }
+  return inside?distance:-distance;
+ }
+ const peaks=[[-350,158,107,112],[-245,34,137,130],[-150,-79,147,122],[-196,-179,66,75],[-55,52,70,118],[248,-190,75,99],[327,25,80,91]];
+ function elevation(x,z) {
+  const edge=coastline(x,z);
+  if(edge<=0)return 0;
+  let rise=9;
+  for(const [px,pz,level,spread] of peaks){
+   const distance=Math.hypot((x-px)*1.05,z-pz);
+   rise+=level*Math.exp(-3*(distance/spread)**2);
+  }
+  const valley=points.valley;
+  const crater=Math.hypot(x-valley[0],z-valley[1]);
+  rise+=24*Math.exp(-(((crater-23)/12)**2))-13*Math.exp(-((crater/17)**2));
+  rise+=6*Math.sin(x*.113)*Math.cos(z*.082)+7*noise(x,z);
+  return Math.max(1,rise*Math.min(1,edge/35));
+ }
+ const landFaces=[];
+ const step=30, bounds={west:-545,east:505,north:-475,south:395};
+ const terrain=[];
+ function terrainColor(a,b,c) {
+  const xu=b[0]-a[0], yu=b[1]-a[1], zu=b[2]-a[2];
+  const xv=c[0]-a[0], yv=c[1]-a[1], zv=c[2]-a[2];
+  const nx=yu*zv-zu*yv, ny=zu*xv-xu*zv, nz=xu*yv-yu*xv;
+  const light=clamp((-nx*.62+Math.abs(ny)*.72-nz*.32)/Math.hypot(nx,ny,nz),0,1);
+  const level=(a[1]+b[1]+c[1])/3;
+  const jitter=noise(a[0]+b[0],c[2])*9;
+  const snow=smooth(clamp((level-86)/53,0,1));
+  const base=[25+light*41+jitter,57+light*43+jitter,54+light*30+jitter];
+  const high=[151+light*66,177+light*53,180+light*52];
+  return 'rgb('+base.map((v,i)=>Math.round(blend(v,high[i],snow))).join(',')+')';
+ }
+ for(let z=bounds.north;z<=bounds.south;z+=step){
+  const row=[];
+  for(let x=bounds.west;x<=bounds.east;x+=step){
+   const shiftX=(noise(x,z)-.5)*11, shiftZ=(noise(z,x)-.5)*11;
+   row.push([x+shiftX,elevation(x+shiftX,z+shiftZ),z+shiftZ]);
+  }
+  terrain.push(row);
+ }
+ for(let j=1;j<terrain.length;j++){
+  for(let i=1;i<terrain[j].length;i++){
+   const a=terrain[j-1][i-1], b=terrain[j-1][i], c=terrain[j][i-1], d=terrain[j][i];
+   for(const face of [[a,c,b],[b,c,d]]){
+    if(face.some(point=>point[1]>0))landFaces.push({face,color:terrainColor(...face)});
+   }
+  }
+ }
+ function ground(x,z,lift=0){ return [x,elevation(x,z)+lift,z]; }
+ const pins=Object.fromEntries(Object.entries(points).map(([name,[x,z]])=>[name,ground(x,z,5)]));
+ const routes = {
+  dine:['hotel','parking','nob','tomo','chi','kit','sushi','north','zeni','otaru','street'],
+  direct:['hotel','parking','nob','tomo','chi','kit','jct','north','zeni','otaru','street']
+ };
+ const bends = {
+  'nob:tomo':[[-204,258],[-156,251],[-91,239],[-37,230]],
+  'tomo:chi':[[57,180],[99,139]], 'chi:kit':[[137,48]],
+  'kit:sushi':[[98,-50],[82,-77]], 'kit:jct':[[136,-87],[145,-127]],
+  'north:zeni':[[12,-209],[-36,-221],[-66,-237]],
+  'zeni:otaru':[[-134,-259],[-164,-256]], 'otaru:street':[[-208,-277]]
+ };
+ const pathCache=new Map();
+ function makePath(names){
+  const key=names.join(':');
+  if(pathCache.has(key)) return pathCache.get(key);
+  const knots=[points[names[0]]];
+  for(let i=1;i<names.length;i++){
+   knots.push(...(bends[names[i-1]+':'+names[i]]??[]),points[names[i]]);
+  }
+  const samples=[ground(...knots[0],7)], lengths=[0];
+  for(let i=1;i<knots.length;i++){
+   const from=knots[i-1], to=knots[i];
+   const length=Math.hypot(to[0]-from[0],to[1]-from[1]);
+   const count=Math.ceil(length/7);
+   for(let n=1;n<=count;n++){
+    const t=n/count;
+    samples.push(ground(blend(from[0],to[0],t),blend(from[1],to[1],t),7));
+    lengths.push(lengths.at(-1)+length/count);
+   }
+  }
+  const path={samples,lengths,length:lengths.at(-1)};
+  pathCache.set(key,path);
+  return path;
+ }
+ function at(path,progress){
+  if(path.samples.length===1) return {position:path.samples[0],heading:[1,0]};
+  const distance=clamp(progress,0,1)*path.length;
+  const i=Math.max(1,path.lengths.findIndex(length=>length>=distance));
+  const a=path.samples[i-1], b=path.samples[i];
+  const t=(distance-path.lengths[i-1])/(path.lengths[i]-path.lengths[i-1]);
+  return {position:a.map((v,k)=>blend(v,b[k],t)),heading:[b[0]-a[0],b[2]-a[2]]};
+ }
+ const boxes=[];
+ function town(x,z,count,spread) {
+  for(let i=0;i<count;i++){
+   const px=x+(noise(i,x)-.5)*spread, pz=z+(noise(i,z)-.5)*spread*.64;
+   if(coastline(px,pz)<12)continue;
+   boxes.push({ground:ground(px,pz,1),width:4+8*noise(px,i),depth:5+7*noise(i,pz),height:8+24*noise(i+11,pz)});
+  }
+ }
+ town(86,-145,42,158); town(-217,-289,20,94); town(18,214,19,108);
+ const markers={
+  valley:'地獄谷', nob:'登別東IC', tomo:'苫小牧', chi:'千歳', kit:'北広島IC',
+  sushi:'トリトン豊平店', north:'札幌北IC', jct:'札幌JCT', otaru:'小樽IC',
+  street:'小樽・堺町通り', hotel:'まほろば', parking:'地獄谷駐車場', zeni:'銭函'
+ };
+ const landmarks=['valley','tomo','sushi','street'];
+ function camera(focus,progress,overview) {
+  const angle=overview?-.17:blend(-.26,.22,smooth(clamp(progress,0,1)));
+  const target=overview?[0,3,-34]:[focus[0]*.43,focus[1]*.23,focus[2]*.42-23];
+  const radius=overview?845:685;
+  const eye=[target[0]+Math.sin(angle)*radius,overview?880:691,target[2]+Math.cos(angle)*radius];
+  const normalize=v=>{const l=Math.hypot(...v);return v.map(n=>n/l)};
+  const forward=normalize(target.map((v,i)=>v-eye[i]));
+  const right=normalize([-forward[2],0,forward[0]]);
+  const up=[
+   right[1]*forward[2]-right[2]*forward[1],
+   right[2]*forward[0]-right[0]*forward[2],
+   right[0]*forward[1]-right[1]*forward[0]
+  ];
+  return point=>{
+   const x=point[0]-eye[0], y=point[1]-eye[1], z=point[2]-eye[2];
+   const d=Math.max(20,x*forward[0]+y*forward[1]+z*forward[2]);
+   const scale=focal/d;
+   return [width*.5+(x*right[0]+y*right[1]+z*right[2])*scale,
+    height*.51-(x*up[0]+y*up[1]+z*up[2])*scale,d];
+  };
+ }
+ function polygon(points,color,stroke=color){
+  ctx.beginPath();
+  points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
+  ctx.closePath();ctx.fillStyle=color;ctx.fill();
+  if(stroke){ctx.lineWidth=.65;ctx.strokeStyle=stroke;ctx.stroke()}
+ }
+ function line(points,color,weight,dashes=[]){
+  if(points.length<2)return;
+  ctx.beginPath();
+  points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
+  ctx.strokeStyle=color;ctx.lineWidth=weight;ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.setLineDash(dashes);ctx.stroke();ctx.setLineDash([]);
+ }
+ function glow(x,y,r,inner){
+  const gradient=ctx.createRadialGradient(x,y,0,x,y,r);
+  gradient.addColorStop(0,inner);gradient.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=gradient;ctx.fillRect(x-r,y-r,r*2,r*2);
+ }
+ function water(project){
+  const gradient=ctx.createLinearGradient(0,0,0,height);
+  gradient.addColorStop(0,'#173e4b');gradient.addColorStop(.67,'#0b2635');gradient.addColorStop(1,'#071a28');
+  ctx.fillStyle=gradient;ctx.fillRect(0,0,width,height);
+  glow(width*.33,height*.23,width*.52,'rgba(66,139,142,.18)');
+  for(let z=-615;z<=620;z+=59){
+   line([project([-850,0,z]),project([810,0,z])],'rgba(151,216,222,.13)',1);
+  }
+  for(let x=-850;x<=810;x+=59){
+   line([project([x,0,-615]),project([x,0,620])],'rgba(151,216,222,.10)',1);
+  }
+ }
+ function drawTerrain(project){
+  const projected=new Map();
+  const coords=point=>{
+   if(!projected.has(point))projected.set(point,project(point));
+   return projected.get(point);
+  };
+  const faces=landFaces.map(({face,color})=>{
+   const vertices=face.map(coords);
+   return [vertices,color,vertices[0][2]+vertices[1][2]+vertices[2][2]];
+  }).sort((a,b)=>b[2]-a[2]);
+  for(const [vertices,color] of faces)polygon(vertices,color);
+ }
+ function building(box,project){
+  const [x,y,z]=box.ground, w=box.width/2, d=box.depth/2;
+  const floor=[[x-w,y,z-d],[x+w,y,z-d],[x+w,y,z+d],[x-w,y,z+d]];
+  const roof=floor.map(([x,y,z])=>project([x,y+box.height,z]));
+  const bottom=floor.map(project);
+  polygon([bottom[0],bottom[3],roof[3],roof[0]],'#304d56',null);
+  polygon([bottom[1],bottom[2],roof[2],roof[1]],'#2d4e59',null);
+  polygon([bottom[3],bottom[2],roof[2],roof[3]],'#75959b',null);
+  polygon(roof,'#adc7c4',null);
+ }
+ function mark([x,y],name,highlight=false) {
+  ctx.font=(highlight?'750 30px ':'650 26px ')+'system-ui,sans-serif';
+  const textWidth=ctx.measureText(name).width;
+  const w=textWidth+29, h=highlight?48:41;
+  const left=clamp(x+13,21,width-w-20), top=clamp(y-h-21,22,height-h-24);
+  line([[x,y],[x,y-11],[left+8,top+h]],highlight?'#ffe2a3':'#a1c0b9',1.7);
+  ctx.beginPath();ctx.arc(x,y,highlight?5.5:4,0,Math.PI*2);
+  ctx.fillStyle=highlight?'#ffd681':'#b9d8c8';ctx.fill();
+  ctx.beginPath();ctx.roundRect(left,top,w,h,10);
+  ctx.fillStyle=highlight?'#f6ce80':'rgba(9,29,35,.9)';ctx.fill();
+  if(!highlight){ctx.lineWidth=1;ctx.strokeStyle='#749b93';ctx.stroke()}
+  ctx.fillStyle=highlight?'#182c26':'#eef4e7';
+  ctx.textBaseline='middle';ctx.fillText(name,left+14,top+h*.5+1);
+ }
+ function vehicle(position,heading,project){
+  const [x,y,z]=position;
+  const [hx,hz]=heading, magnitude=Math.hypot(hx,hz);
+  const a=hx/magnitude, b=hz/magnitude;
+  const vertex=(along,side,lift)=>project([x+a*along-b*side,y+lift,z+b*along+a*side]);
+  const hull=[vertex(-11,-6,1),vertex(11,-6,1),vertex(11,6,1),vertex(-11,6,1)];
+  const bonnet=[vertex(-11,-6,7),vertex(11,-6,7),vertex(11,6,7),vertex(-11,6,7)];
+  const roof=[vertex(-6,-4,12),vertex(4,-4,12),vertex(4,4,12),vertex(-6,4,12)];
+  polygon([hull[0],hull[1],bonnet[1],bonnet[0]],'#a66234',null);
+  polygon([hull[2],hull[3],bonnet[3],bonnet[2]],'#b8773b',null);
+  polygon([hull[1],hull[2],bonnet[2],bonnet[1]],'#ffc671',null);
+  polygon(bonnet,'#ffbf64',null);
+  polygon([bonnet[1],bonnet[2],roof[2],roof[1]],'#305769',null);
+  polygon(roof,'#fff1c3',null);
+  for(const side of [-4,4]){
+   const [lx,ly]=vertex(11,side,5);
+   glow(lx,ly,13,'rgba(255,226,152,.5)');
+   ctx.fillStyle='#fff7cf';ctx.fillRect(lx-2,ly-2,4,4);
+  }
+ }
+ function steam(project,minute){
+  const [x,,z]=pins.valley;
+  for(let i=0;i<5;i++){
+   const phase=(minute*.11+i*.21)%1;
+   const [sx,sy]=project(ground(x-12+i*4+phase*13,z-3+i*4,12+phase*37));
+   glow(sx,sy,9+phase*24,'rgba(229,241,231,'+(0.38*(1-phase)).toFixed(2)+')');
+  }
+ }
+ function draw(stage,inside,mode,elapsed,end){
+  if(!ctx)return;
+  const [,tag,,,names,length]=stage;
+  const path=makePath(names);
+  const {position,heading}=at(path,length?inside/length:0);
+  const progress=elapsed/Math.max(end,1);
+  const overview=$('cameraView').getAttribute('aria-pressed')==='true';
+  const project=camera(position,progress,overview);
+  water(project);
+  drawTerrain(project);
+  for(const box of boxes)building(box,project);
+  steam(project,elapsed);
+  const base=makePath(mode==='direct'?routes.direct:routes.dine).samples.map(project);
+  const walk=makePath(['parking','valley']).samples.map(project);
+  line(base,'rgba(5,23,29,.86)',14);
+  line(base,'#b2cbb4',3.5);
+  line(walk,'#d3dabc',3,[5,6]);
+  const active=path.samples.map(project);
+  line(active,'rgba(252,186,93,.20)',19);
+  line(active,'#ac8b5e',4);
+  const distance=clamp(length?inside/length:0,0,1)*path.length;
+  const covered=active.filter((_,i)=>path.lengths[i]<distance);
+  const [x,y]=project(position);
+  line([...covered,[x,y]],'#ffce79',6);
+  glow(x,y,43,'rgba(255,200,116,.38)');
+  if(tag==='徒歩'||path.length===0){
+   ctx.beginPath();ctx.arc(x,y,tag==='到着'?8:6,0,Math.PI*2);
+   ctx.fillStyle='#fff0c1';ctx.fill();ctx.strokeStyle='#293829';ctx.lineWidth=2;ctx.stroke();
+  }else vehicle(position,heading,project);
+  const focus=length&&inside/length>.56?names.at(-1):names[0];
+  for(const name of landmarks){
+   if(name!==focus && !(mode==='direct'&&name==='sushi')){
+    const p=project(pins[name]), f=project(pins[focus]);
+    if(Math.hypot(p[0]-f[0],p[1]-f[1])>118)mark(p,markers[name]);
+   }
+  }
+  mark(project(pins[focus]),markers[focus],true);
+  const vignette=ctx.createRadialGradient(width*.5,height*.51,height*.13,width*.5,height*.51,width*.64);
+  vignette.addColorStop(0,'rgba(0,12,20,0)');vignette.addColorStop(1,'rgba(0,12,20,.39)');
+  ctx.fillStyle=vignette;ctx.fillRect(0,0,width,height);
+ }
+ return {draw};
+})();
+const departureTime = 8 * 60 + 40;
+const targetArrivalTime = 15 * 60;
+const format = minute => {
+ const total = Math.floor(minute) + departureTime;
+ return String(Math.floor(total/60)).padStart(2,'0')+':'+String(total%60).padStart(2,'0');
+};
+let stages, elapsed=0, end=0, running=false, previous=0, frame=0, active=-1;
+function render(){
+ const index=stages.findLastIndex(stage=>stage[0]<=elapsed);
+ const stage=stages[index];
+ $('seek').value=Math.floor(elapsed);
+ $('seek').setAttribute('aria-valuetext',format(elapsed));
+ $('clock').textContent=format(elapsed);
+ if(active!==index){
+  $('tag').textContent=stage[1];$('stageTitle').textContent=stage[2];$('stageText').textContent=stage[3];
+  $('plan').querySelector('[aria-current]')?.removeAttribute('aria-current');
+  $('plan').children[index].firstElementChild.setAttribute('aria-current','step');
+  active=index;
+ }
+ routeScene.draw(stage,elapsed-stage[0],$('lunch').value,elapsed,end);
+}
+function pause(){
+ running=false;cancelAnimationFrame(frame);$('play').textContent=elapsed>=end?'↻ 再生':'▶ 再生';
+ $('play').setAttribute('aria-label','行程を再生');
+}
+function tick(now){
+ if(!running)return;
+ if(previous)elapsed=Math.min(end,elapsed+Math.min(100,now-previous)/1000*9*Number($('speed').value));
+ previous=now;render();
+ if(elapsed>=end)pause();else frame=requestAnimationFrame(tick);
+}
+function reset(){
+ pause();elapsed=0;active=-1;
+ stages=build($('lunch').value,Number($('delay').value));end=stages.at(-1)[0];
+ $('seek').max=end;
+ $('eta').textContent=format(end);
+ const difference=targetArrivalTime - departureTime - end;
+ $('summary').dataset.late=String(difference<0);
+ $('margin').textContent=difference===0?'15:00ちょうどの見込み':difference>0?'15:00までに'+difference+'分の余裕':'15:00を'+(-difference)+'分超過する見込み';
+ $('plan').replaceChildren(...stages.map(([start,,title])=>{
+  const li=document.createElement('li'),button=document.createElement('button'),time=document.createElement('time');
+  button.type='button';time.textContent=format(start);time.dateTime=format(start);
+  button.append(time,title);li.append(button);button.addEventListener('click',()=>{elapsed=start;pause();render()});
+  return li;
+ }));
+ pause();render();
+}
+$('play').addEventListener('click',()=>{
+ if(running){pause();return}
+ if(elapsed>=end){elapsed=0;render()}
+ running=true;previous=0;$('play').textContent='Ⅱ 一時停止';
+ $('play').setAttribute('aria-label','行程を一時停止');frame=requestAnimationFrame(tick);
+});
+$('restart').addEventListener('click',()=>{elapsed=0;pause();render()});
+$('cameraView').addEventListener('click',event=>{
+ const button=event.currentTarget;
+ button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true'));
+ render();
+});
+$('seek').addEventListener('input',()=>{elapsed=Number($('seek').value);pause();render()});
+$('lunch').addEventListener('change',reset);
+$('delay').addEventListener('change',reset);
+reset();
+</script>
+
+<script>
+(() => {
+  const tabList = document.getElementById('tripTabs');
+  const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+  function selectTab(selected) {
+    for (const tab of tabs) {
+      const active = tab === selected;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      document.getElementById(tab.getAttribute('aria-controls')).hidden = !active;
+    }
+  }
+  tabList.addEventListener('click', event => {
+    if (tabs.includes(event.target)) selectTab(event.target);
+  });
+  tabList.addEventListener('keydown', event => {
+    const current = tabs.indexOf(event.target);
+    if (current === -1) return;
+    const choices = {
+      ArrowLeft: (current + tabs.length - 1) % tabs.length,
+      ArrowRight: (current + 1) % tabs.length,
+      Home: 0,
+      End: tabs.length - 1
+    };
+    if (!Object.hasOwn(choices, event.key)) return;
+    event.preventDefault();
+    const next = tabs[choices[event.key]];
+    selectTab(next);
+    next.focus();
+  });
+  document.getElementById('routeTraffic').addEventListener('click', event => {
+    event.preventDefault();
+    const trafficTab = document.getElementById('trafficTab');
+    selectTab(trafficTab);
+    trafficTab.focus();
+  });
+  selectTab(location.hash === '#trafficPanel' ? document.getElementById('trafficTab') : tabs[0]);
+  tabList.hidden = false;
+})();
+</script>
+</body>
+</html>
